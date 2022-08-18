@@ -18,6 +18,6 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "build/database/models/user.js"],
   "exclude": ["src/tests"]
 }
