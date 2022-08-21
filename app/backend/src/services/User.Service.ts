@@ -6,13 +6,13 @@ import Login from '../interfaces/Interfaces';
 import CodeError from '../errors/CodeError';
 
 class UserService {
-  static async loginValidation(login: Login) {
+  static loginValidation(login: Login) {
     const validation = Joi.object({
       email: Joi.string().email().required(),
       password: Joi.string().required(),
     });
 
-    const { value, error } = await validation.validate(login);
+    const { value, error } = validation.validate(login);
 
     if (error) {
       throw new CodeError('All fields must be filled', 400);
