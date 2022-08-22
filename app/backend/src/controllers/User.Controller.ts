@@ -9,6 +9,14 @@ class UserController {
 
     res.status(200).json({ token });
   }
+
+  static async loginVerification(req: Request, res: Response) {
+    const token = req.headers.authorization || 'tokenfake';
+    const { data: { email } } = await Servise.tokenVerification(token);
+    const { role } = await Servise.login(email);
+
+    res.status(200).json({ role });
+  }
 }
 
 export default UserController;
