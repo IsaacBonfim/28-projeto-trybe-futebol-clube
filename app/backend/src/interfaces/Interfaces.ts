@@ -1,6 +1,15 @@
-interface login {
+interface Login {
   email: string,
   password: string,
 }
 
-export default login;
+interface Token {
+  data: {
+    email: string,
+  }
+}
+
+export {
+  Login,
+  Token,
+};
