@@ -2,7 +2,7 @@ import 'dotenv/config';
 import * as jwt from 'jsonwebtoken';
 import * as Joi from 'joi';
 import User from '../database/models/User.Model';
-import Login from '../interfaces/Interfaces';
+import { Login, Token } from '../interfaces/Interfaces';
 import CodeError from '../errors/CodeError';
 
 class UserService {
@@ -38,6 +38,13 @@ class UserService {
     const token = jwt.sign({ data: user }, secret);
 
     return token;
+  }
+
+  static async tokenVerification(token: string) {
+    const secret: string = process.env.JWT_SECRET || 'jwt_secret';
+    const data = jwt.verify(token, secret);
+
+    return data as Token;
   }
 }
 
