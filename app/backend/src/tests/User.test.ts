@@ -88,4 +88,26 @@ describe('Testando as rotas de Login', () => {
 
     expect(result.body).to.have.property('token');
   })
+
+  it('Verificando se a categoria do usuário(role) é retornado', async () => {
+    sinon.stub(User, 'findOne').resolves(mock[0] as User);
+
+    const token = await chai.request(app)
+      .post('/login')
+      .send(login)
+      .then((response) => response.body.token);
+
+    const result = await chai.request(app)
+      .get('/login/validate')
+      .set('Authorization', token);
+
+    expect(result.body).to.have.property('role');
+  })
+
+  it('Verificando se um erro é retornado caso o token seja invalido', async () => {
+    const result = await chai.request(app)
+      .get('/login/validate');
+
+    expect(result.status).to.equal(500);
+  })
 })

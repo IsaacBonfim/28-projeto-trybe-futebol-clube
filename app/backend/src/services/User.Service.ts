@@ -34,14 +34,16 @@ class UserService {
   }
 
   static async getToken(user: User | null) {
-    const secret: string = process.env.JWT_SECRET || 'jwt_secret';
+    // const secret: string = process.env.JWT_SECRET || 'jwt_secret';
+    const secret = 'jwt_secret';
     const token = jwt.sign({ data: user }, secret);
 
     return token;
   }
 
   static async tokenVerification(token: string) {
-    const secret: string = process.env.JWT_SECRET || 'jwt_secret';
+    // const secret: string = process.env.JWT_SECRET || 'jwt_secret';
+    const secret = 'jwt_secret';
     const data = jwt.verify(token, secret);
 
     return data as Token;
