@@ -9,7 +9,13 @@ interface Token {
   }
 }
 
+interface Team {
+  id: number,
+  teamName: string,
+}
+
 export {
   Login,
   Token,
+  Team,
 };
