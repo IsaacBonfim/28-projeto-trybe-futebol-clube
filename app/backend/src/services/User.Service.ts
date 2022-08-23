@@ -8,7 +8,7 @@ import CodeError from '../errors/CodeError';
 class UserService {
   static loginValidation(login: Login) {
     const validation = Joi.object({
-      email: Joi.string().email().required(),
+      email: Joi.string().required(),
       password: Joi.string().required(),
     });
 
