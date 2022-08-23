@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import 'express-async-errors';
 import lRoute from './routes/User.Routes';
 import tRoute from './routes/Team.Routes';
+import mRoute from './routes/Match.Routes';
 import Errors from './middleware/Error.Middleware';
 
 class App {
@@ -31,6 +32,7 @@ class App {
 
     this.app.use('/login', lRoute);
     this.app.use('/teams', tRoute);
+    this.app.use('/matches', mRoute);
 
     this.app.use(Errors);
   }
