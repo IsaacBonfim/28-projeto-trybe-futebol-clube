@@ -12,7 +12,7 @@ class TeamService {
     return teams;
   }
 
-  static async getTeamById(id: string): Promise<Team> {
+  static async getTeamById(id: string | number): Promise<Team> {
     const team = await Model.findOne(
       { where: { id }, raw: true },
     );
