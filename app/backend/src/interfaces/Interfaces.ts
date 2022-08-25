@@ -14,13 +14,16 @@ interface Team {
   teamName: string,
 }
 
-interface Match {
+interface dbMatch {
   id: number,
   homeTeam: number,
   homeTeamGoals: number,
   awayTeam: number,
   awayTeamGoals: number,
   inProgress?: boolean,
+}
+
+interface appMatch extends dbMatch {
   teamHome?: {
     teamName: string,
   },
@@ -33,5 +36,6 @@ export {
   Login,
   Token,
   Team,
-  Match,
+  dbMatch,
+  appMatch,
 };
