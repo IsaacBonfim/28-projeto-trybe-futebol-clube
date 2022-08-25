@@ -32,10 +32,18 @@ interface appMatch extends dbMatch {
   }
 }
 
+interface newMatch {
+  homeTeam: number,
+  homeTeamGoals: number,
+  awayTeam: number,
+  awayTeamGoals: number,
+}
+
 export {
   Login,
   Token,
   Team,
   dbMatch,
   appMatch,
+  newMatch,
 };
