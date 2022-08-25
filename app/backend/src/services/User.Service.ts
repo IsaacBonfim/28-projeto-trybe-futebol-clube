@@ -38,7 +38,7 @@ class UserService {
 
   static async passwordValidation(password: string, userPassword: string) {
     const result = await bcrypt.compare(password, userPassword);
-    console.log(result, password);
+
     if (!result) {
       throw new CodeError('Incorrect email or password', 401);
     }
