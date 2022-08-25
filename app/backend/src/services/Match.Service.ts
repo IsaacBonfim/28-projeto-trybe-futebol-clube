@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import mModel from '../database/models/Match.Model';
 import tModel from '../database/models/Team.Model';
-import { dbMatch, appMatch } from '../interfaces/Interfaces';
+import { dbMatch, appMatch, newMatch } from '../interfaces/Interfaces';
+import CodeError from '../errors/CodeError';
 
 class MatchService {
   static async teamNames(match: dbMatch) {
@@ -31,6 +32,28 @@ class MatchService {
     );
 
     return matches as appMatch[];
+  }
+
+  static async idTeamValidation(id: string) {
+    const homeId = await tModel.findOne(
+      { where: { id }, attributes: ['id'], raw: true },
+    );
+
+    if (!homeId) throw new CodeError('Team not found', 404);
+  }
+
+  static async postMatches(match: newMatch) {
+    const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = match;
+
+    const createdMatch = await mModel.create({
+      homeTeam,
+      awayTeam,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
+    }, { raw: true });
+
+    return createdMatch;
   }
 }
 
