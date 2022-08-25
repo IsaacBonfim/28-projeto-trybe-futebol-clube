@@ -1,18 +1,18 @@
 import 'dotenv/config';
 import mModel from '../database/models/Match.Model';
 import tModel from '../database/models/Team.Model';
-import { Match } from '../interfaces/Interfaces';
+import { dbMatch, appMatch } from '../interfaces/Interfaces';
 
 class MatchService {
-  static async teamNames(match: Match) {
+  static async teamNames(match: dbMatch) {
     const { homeTeam, awayTeam, inProgress } = match;
 
     const homeTeamName = await tModel.findOne(
-      { where: { id: homeTeam }, attributes: ['teamName'] },
+      { where: { id: homeTeam }, attributes: ['teamName'], raw: true },
     ).then((team) => team?.teamName);
 
     const awayTeamName = await tModel.findOne(
-      { where: { id: awayTeam }, attributes: ['teamName'] },
+      { where: { id: awayTeam }, attributes: ['teamName'], raw: true },
     ).then((team) => team?.teamName);
 
     return {
@@ -23,14 +23,14 @@ class MatchService {
     };
   }
 
-  static async getMatches(): Promise<Match[]> {
-    const matchesList = await mModel.findAll({ raw: true });
+  static async getMatches(): Promise<appMatch[]> {
+    const matchList = await mModel.findAll({ raw: true });
 
     const matches = await Promise.all(
-      matchesList.map(MatchService.teamNames),
+      matchList.map(MatchService.teamNames),
     );
 
-    return matches as Match[];
+    return matches as appMatch[];
   }
 }
 
