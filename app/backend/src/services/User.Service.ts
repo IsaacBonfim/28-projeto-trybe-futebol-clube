@@ -1,14 +1,11 @@
 import 'dotenv/config';
-import * as jwt from 'jsonwebtoken';
 import * as Joi from 'joi';
 import * as bcrypt from 'bcryptjs';
 import Model from '../database/models/User.Model';
-import { Login, Token } from '../interfaces/Interfaces';
+import { Login } from '../interfaces/Interfaces';
 import CodeError from '../errors/CodeError';
 
 class UserService {
-  private static secret = process.env.JWT_SECRET || 'jwt_secret';
-
   static loginValidation(login: Login) {
     const validation = Joi.object({
       email: Joi.string().required(),
@@ -42,18 +39,6 @@ class UserService {
     if (!result) {
       throw new CodeError('Incorrect email or password', 401);
     }
-  }
-
-  static async getToken(user: Login | null) {
-    const token = jwt.sign({ data: user }, this.secret);
-
-    return token;
-  }
-
-  static async tokenVerification(token: string) {
-    const data = jwt.verify(token, this.secret);
-
-    return data as Token;
   }
 }
 
