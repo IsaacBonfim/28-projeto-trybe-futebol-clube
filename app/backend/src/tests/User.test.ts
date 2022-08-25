@@ -18,7 +18,7 @@ describe('Testando as rotas de Login', () => {
   };
 
   beforeEach(() => {
-    let login = {
+    login = {
       email: 'admin@admin.com',
       password: 'secret_admin',
     };
@@ -70,8 +70,8 @@ describe('Testando as rotas de Login', () => {
     expect(result.body).to.have.property('message', 'All fields must be filled');
   })
 
-  it('Verificando se um erro é retornado caso o senha esteja incorreta', async () => {
-    sinon.stub(User, 'findOne').resolves();
+  it('Verificando se um erro é retornado caso a senha esteja incorreta', async () => {
+    sinon.stub(User, 'findOne').resolves(mock[0] as User);
 
     login.password = 'senhaerrada';
 
