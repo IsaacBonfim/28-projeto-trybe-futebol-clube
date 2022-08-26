@@ -39,7 +39,7 @@ class MatchService {
       { where: { id }, attributes: ['id'], raw: true },
     );
 
-    if (!homeId) throw new CodeError('Team not found', 404);
+    if (!homeId) throw new CodeError('There is no team with such id!', 404);
   }
 
   static async postMatches(match: newMatch) {
