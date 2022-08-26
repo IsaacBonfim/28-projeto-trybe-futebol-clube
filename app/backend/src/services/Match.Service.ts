@@ -55,6 +55,12 @@ class MatchService {
 
     return createdMatch;
   }
+
+  static async finishMatch(id: string | number) {
+    const match = await mModel.update({ inProgress: false }, { where: { id } });
+
+    return match;
+  }
 }
 
 export default MatchService;
