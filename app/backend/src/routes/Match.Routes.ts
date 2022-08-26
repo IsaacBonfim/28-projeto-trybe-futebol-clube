@@ -5,6 +5,7 @@ const route = Router();
 
 route
   .get('/', Controller.getMatches)
-  .post('/', Controller.postMatches);
+  .post('/', Controller.postMatches)
+  .patch('/:id/finish', Controller.finishMatch);
 
 export default route;
