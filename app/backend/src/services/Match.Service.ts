@@ -45,6 +45,10 @@ class MatchService {
   static async postMatches(match: newMatch) {
     const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = match;
 
+    if (homeTeam === awayTeam) {
+      throw new CodeError('It is not possible to create a match with two equal teams', 401);
+    }
+
     const createdMatch = await mModel.create({
       homeTeam,
       awayTeam,
