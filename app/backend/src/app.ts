@@ -31,8 +31,8 @@ class App {
     this.app.use(cors());
 
     this.app.use('/login', lRoute);
-    this.app.use('/teams', tRoute);
     this.app.use('/matches', mRoute);
+    this.app.use('/teams', tRoute);
 
     this.app.use(Errors);
   }
