@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import Service from '../services/Match.Service';
 import tkMiddleware from '../middleware/Token.Middleware';
-import CodeError from '../errors/CodeError';
 
 class MatchController {
   static async getMatches(_req: Request, res: Response) {
@@ -12,10 +11,7 @@ class MatchController {
 
   static async postMatches(req: Request, res: Response) {
     const token = req.headers.authorization || 'tokenfake';
-
-    const data = await tkMiddleware.tokenVerification(token);
-
-    if (!data) throw new CodeError('Invalid token', 401);
+    await tkMiddleware.tokenValidation(token);
 
     const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = req.body;
 
