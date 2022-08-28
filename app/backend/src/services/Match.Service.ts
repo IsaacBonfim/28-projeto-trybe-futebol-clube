@@ -34,6 +34,22 @@ class MatchService {
     return matches as appMatch[];
   }
 
+  static async getMatchByTeamId(id: string | number, type = '') {
+    let matches: dbMatch[];
+
+    if (type) {
+      matches = await mModel.findAll({
+        where: { [type]: id, inProgress: false }, raw: true,
+      });
+    } else {
+      matches = await mModel.findAll({
+        where: { inProgress: false }, raw: true,
+      });
+    }
+
+    return matches;
+  }
+
   static async idTeamValidation(id: string) {
     const homeId = await tModel.findOne(
       { where: { id }, attributes: ['id'], raw: true },
