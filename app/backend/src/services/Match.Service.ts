@@ -50,7 +50,7 @@ class MatchService {
     return matches;
   }
 
-  static async idTeamValidation(id: string) {
+  static async idTeamValidation(id: string | number) {
     const homeId = await tModel.findOne(
       { where: { id }, attributes: ['id'], raw: true },
     );
