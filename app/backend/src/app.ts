@@ -4,6 +4,7 @@ import 'express-async-errors';
 import lRoute from './routes/User.Routes';
 import tRoute from './routes/Team.Routes';
 import mRoute from './routes/Match.Routes';
+import bRoute from './routes/Leaderboard.Routes';
 import Errors from './middleware/Error.Middleware';
 
 class App {
@@ -30,6 +31,7 @@ class App {
     this.app.use(accessControl);
     this.app.use(cors());
 
+    this.app.use('/leaderboard', bRoute);
     this.app.use('/login', lRoute);
     this.app.use('/matches', mRoute);
     this.app.use('/teams', tRoute);
