@@ -39,6 +39,19 @@ interface newMatch {
   awayTeamGoals: number,
 }
 
+interface InfoBoard {
+  name: string,
+  totalPoints: number,
+  totalGames: number,
+  totalVictories: number,
+  totalDraws: number,
+  totalLosses: number,
+  goalsFavor: number,
+  goalsOwn: number,
+  goalsBalance: number,
+  efficiency: number,
+}
+
 export {
   Login,
   Token,
@@ -46,4 +59,5 @@ export {
   dbMatch,
   appMatch,
   newMatch,
+  InfoBoard,
 };
