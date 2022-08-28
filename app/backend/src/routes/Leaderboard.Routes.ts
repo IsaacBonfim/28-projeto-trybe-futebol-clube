@@ -4,6 +4,6 @@ import Controller from '../controllers/Leaderboard.Controller';
 const route = Router();
 
 route
-  .get('/:type', Controller.homeBoard);
+  .get('/:type', Controller.Leaderboard);
 
 export default route;
