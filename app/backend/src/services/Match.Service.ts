@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { Op } from 'sequelize';
 import mModel from '../database/models/Match.Model';
 import tModel from '../database/models/Team.Model';
 import { dbMatch, appMatch, newMatch } from '../interfaces/Interfaces';
@@ -46,6 +47,21 @@ class MatchService {
         where: { inProgress: false }, raw: true,
       });
     }
+
+    return matches;
+  }
+
+  static async getByTeam(id: string | number) {
+    const matches = await mModel.findAll({
+      where: {
+        inProgress: false,
+        [Op.or]: [
+          { homeTeam: id },
+          { awayTeam: id },
+        ],
+      },
+      raw: true,
+    });
 
     return matches;
   }
